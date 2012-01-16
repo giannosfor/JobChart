@@ -1,6 +1,7 @@
 
 package Charts;
 
+import Extras.OpenFile;
 import java.awt.Color;
 import java.sql.SQLException;
 import org.jfree.chart.ChartFactory;
@@ -19,6 +20,8 @@ public class BarChart  implements ChartMouseListener {
 
     private ChartPanel chartpanel;
     private JDBCCategoryDataset dataset;
+    private CategoryPlot plot;
+    private BarRenderer renderer;
     
     public BarChart(String query , String []title)  {
         try {
@@ -29,20 +32,17 @@ public class BarChart  implements ChartMouseListener {
                     title[0], title[1], title[2], dataset,
                     PlotOrientation.VERTICAL, true, true, false);
 
-//
 //            // -------------------- Coloring -------------------- //
-            chart.setBackgroundPaint(Color.white);
-            CategoryPlot plot = (CategoryPlot) chart.getPlot();
+           // chart.setBackgroundPaint(Color.white);
+            plot = (CategoryPlot) chart.getPlot();
             plot.setBackgroundPaint(Color.lightGray);
             plot.setRangeGridlinePaint(Color.white);
-            BarRenderer renderer = (BarRenderer) plot.getRenderer();
+            renderer = (BarRenderer) plot.getRenderer();
             renderer.setSeriesPaint(0, Color.DARK_GRAY);
             renderer.setSeriesPaint(1, Color.cyan);
-            renderer.setDrawBarOutline(false);
+            //renderer.setDrawBarOutline(false);
             renderer.setItemMargin(0.0);
 //            // ------------------------ End ------------------- //
-//
-
 
             chartpanel = new ChartPanel(chart, false);
             chartpanel.addChartMouseListener(this);
@@ -58,18 +58,31 @@ public class BarChart  implements ChartMouseListener {
     public ChartPanel getChartPanel() {
         return chartpanel;
     }
+    
+    public CategoryPlot getPlot() {
+        return plot;
+    }
 
-        public void chartMouseClicked(ChartMouseEvent cme) {
+     public BarRenderer getRenderer() {
+        return renderer;
+    }
+
+    public void chartMouseClicked(ChartMouseEvent cme) {
         ChartEntity chartentity = cme.getEntity();
         String tooltext = chartentity.getToolTipText();
         if ( tooltext != null) {
-           System.out.println( tooltext );
-        }
-        
+           String []params = OpenFile.getSplitTitles(tooltext);
+           if (params[0].equals("Posts")) {     
+               new ChartBar(params[1]);
+           } else {
+               for (String param : params) {
+                    System.out.println(param.toString());
+               }
+           }
+        }     
     }
 
     public void chartMouseMoved(ChartMouseEvent cme) {
 
     }
-
 }

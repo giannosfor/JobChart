@@ -15,21 +15,17 @@ import org.jfree.data.jdbc.JDBCPieDataset;
 public class ChartData implements ChartMouseListener {
     private Connection con;
     ChartPanel chartpanel;
+    JDBCPieDataset data = null;
 
     public ChartData()  {
 
-        try { 
-            
-         Class.forName("com.mysql.jdbc.Driver");
+        try {
+
             con = (Connection) DriverManager.getConnection(
                    "jdbc:mysql://localhost:3306/jobfinder",
                    "giannis",
                    "giannis"
                    );
-            
-            con.createStatement();       
-            
-            JDBCPieDataset data = null;  
             
             data = new JDBCPieDataset(con);
             
@@ -39,23 +35,17 @@ public class ChartData implements ChartMouseListener {
             data.executeQuery(sql);
             
             JFreeChart chart = ChartFactory.createPieChart(
-            "Companies", data, true, true, true);
+            "Companies Posts", data, true, true, true);
            
             chartpanel = new ChartPanel(chart,false);
             chartpanel.addChartMouseListener(this);
 
-            con.close();  
-            
-        }catch(ClassNotFoundException cnfe){
-            cnfe.printStackTrace();
         } catch (SQLException sqle) {
             sqle.printStackTrace();
         }
     }
 
     public ChartPanel getChartPanel() {
-
-
         return chartpanel;
     }
 

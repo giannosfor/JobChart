@@ -6,26 +6,26 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import org.jfree.ui.ApplicationFrame;
+import javax.swing.JFrame;
 import org.jfree.ui.RefineryUtilities;
 
 
-public class ChartMain extends ApplicationFrame {
+public class ChartMain extends JFrame {
     
     public ChartMain() {
 
-        super(null);
+        super("");
         setLayout(new GridLayout(2, 1));
         add(new ChartData().getChartPanel());
-        String []array =  { "Synopsys", "Posts/Replys", "Quantity" };
+        String []array =  { "Occupation Fields", null, null };
 
         try {
-
+            
             add(new BarChart( OpenFile.getContent("database/query1.sql") , array ).getChartPanel() );
-            setVisible(true);
             setDefaultCloseOperation(EXIT_ON_CLOSE);
-            setSize(new Dimension(900, 750));
+            setSize(new Dimension(900, 900));
             RefineryUtilities.centerFrameOnScreen(this);
+            setVisible(true);
 
        } catch (FileNotFoundException fe) {
              fe.printStackTrace();

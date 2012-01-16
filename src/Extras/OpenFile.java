@@ -22,6 +22,19 @@ public class OpenFile {
         public static String getQueryMap(String query)
         {
              String[] params = query.split(":");
-             return params[0];
+             return params[0].trim();
+        }
+
+        public static String[] getSplitTitles(String query)
+        {
+            
+             int comma = query.lastIndexOf(",");
+             int pare = query.lastIndexOf(")");
+
+             String []params = new String[2];
+             params[0] = query.substring(1, comma );
+             params[1] = query.substring(comma + 2 , pare );
+
+             return params;
         }
 }
