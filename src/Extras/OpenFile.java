@@ -1,9 +1,9 @@
 
 package Extras;
 
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.BufferedReader;
 import java.io.IOException;
 
 public class OpenFile {
@@ -14,7 +14,7 @@ public class OpenFile {
                 StringBuilder strbuilder = new StringBuilder();
                 String text = "";
                 while( (text = buffer.readLine()) != null ) {
-                    strbuilder.append(text + "\n");
+                    strbuilder.append(text).append("\n");
                 }
                 return strbuilder.toString();
         }

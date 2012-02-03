@@ -23,7 +23,7 @@ public class ChartMain extends JFrame {
             
             add(new BarChart( OpenFile.getContent("database/query1.sql") , array ).getChartPanel() );
             setDefaultCloseOperation(EXIT_ON_CLOSE);
-            setSize(new Dimension(900, 900));
+            setSize(new Dimension(800, 600));
             RefineryUtilities.centerFrameOnScreen(this);
             setVisible(true);
 
@@ -34,10 +34,5 @@ public class ChartMain extends JFrame {
              ie.printStackTrace();
              System.exit(0);
        }
-}
-
-     public static void main(String[] args)  {
-
-        new ChartMain();
-     }
+    }
 }

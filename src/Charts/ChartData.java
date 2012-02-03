@@ -1,8 +1,9 @@
 package Charts;
 
+import Database.Database;
+import Extras.Fields;
 import Extras.OpenFile;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartMouseEvent;
@@ -12,7 +13,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.entity.ChartEntity;
 import org.jfree.data.jdbc.JDBCPieDataset;
 
-public class ChartData implements ChartMouseListener {
+public class ChartData implements ChartMouseListener,Fields {
     private Connection con;
     ChartPanel chartpanel;
     JDBCPieDataset data = null;
@@ -21,11 +22,7 @@ public class ChartData implements ChartMouseListener {
 
         try {
 
-            con = (Connection) DriverManager.getConnection(
-                   "jdbc:mysql://localhost:3306/jobfinder",
-                   "giannis",
-                   "giannis"
-                   );
+            con = Database.getConnection();
             
             data = new JDBCPieDataset(con);
             
@@ -40,6 +37,10 @@ public class ChartData implements ChartMouseListener {
             chartpanel = new ChartPanel(chart,false);
             chartpanel.addChartMouseListener(this);
 
+            con.close();
+
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
         } catch (SQLException sqle) {
             sqle.printStackTrace();
         }
@@ -54,6 +55,7 @@ public class ChartData implements ChartMouseListener {
         if (chartentity.getURLText() != null) { 
            String query = OpenFile.getQueryMap( chartentity.getToolTipText() );
            new ChartPie(query);
+
         }
     }
 
