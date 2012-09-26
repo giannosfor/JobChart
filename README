@@ -1,11 +1,9 @@
-Libraries
+Soon there will be a more thorough description
 
-JFreechart
+This code is part of a project of building an online job agency.
+It projects statistical informations about the agency with the use of charts.
 
-Tools
+You can find snapshots in the description link.
 
-MySQL Server,NetBeans
-
-Project statistics
-Charts Interact on mouse click give dynamically results
-visually.
+The project was buid in Java with the use of JFreeChart.
+I used MySQL Server and Netbeans for the developement.
