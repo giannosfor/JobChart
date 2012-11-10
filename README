@@ -1,8 +1,12 @@
 Soon there will be a more thorough description
 
-This is a portion of a project that I had collaborate. 
-We had build a Recruitment agency ,i made the statistical graphs.
+This is a part of a project I had collaborated with my fellow students. 
+We developed a recruitment agency,this portion of code is about the statistics.
 
-You can find snapshot in the link in the description.
+You can find snapshot in the description link.
 
-Developement tools:Netbeans IDE,JFreeChart,MySql
+I used JFreeChart for the graphs.
+
+You can download and use Netbeans in order to open it as project.
+
+All the queries are in SQL,I used mySQL Server.
